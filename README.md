@@ -1,11 +1,40 @@
-### Level 1: MLP 手写数字识别
-- 模型：MLP（784 → 256 → 10）
-- 数据集：MNIST
-- 测试集准确率：97.33%
-- 包含数据探索、模型定义、训练、推理、错误分析
-### Level 2: CNN 对比实验
-- 模型：SimpleCNN (Conv2d + MaxPool2d x 2 + FC)
-- 控制变量：Batch=64, Epoch=10, LR=0.001 (与 Level 1 完全一致)
-- MNIST 结果：MLP 97.6% vs CNN 99.2% (CNN 更高且参数更少)
-- Fashion-MNIST 结果：MLP 86.67% vs CNN 91.18% (复杂图像上 CNN 优势显著)
+Level 1
+
+### 网络结构
+- Flatten: 28×28 → 784
+- Linear(784, 256) + ReLU
+- Linear(256, 10)
+- 总参数量: 203,530
+
+### 超参数
+
+|    参数    |    值    |
+| Batch Size |    64    |
+|   Epochs   |    10    |
+|   学习率   |   0.001  |
+|   优化器   |   Adam   |
+|  损失函数  | CrossEntropyLoss |
+
+### 实验结果
+- 最终测试集准确率: 97.33%
+- 训练 Loss 曲线和准确率曲线见 level1/training_curves.png
+
+
+Level 2
+
+### CNN 训练曲线
+![CNN 训练曲线](level2/cnn_training_curves.png)
+CNN 的 Loss 下降速度比 MLP 更快，在第1个 Epoch 就达到了 98% 的准确率。
+
+### MLP vs CNN 对比
+![MLP vs CNN 对比](level2/mlp_vs_cnn_comparison.png)
+从对比图可以看出：
+- CNN 的 Loss 下降更快（红色线比蓝色线低）
+- CNN 的最终准确率更高（红色线比蓝色线高）
+- CNN 收敛更快（更早到达 95%）
+
+### Fashion-MNIST 对比
+![Fashion-MNIST 对比](level2/fashion_mnist_comparison.png)
+Fashion-MNIST 是衣服鞋包的图片（T恤、裤子、鞋子等），特征更复杂。
+CNN 在处理复杂图像特征时更加强大。
 
